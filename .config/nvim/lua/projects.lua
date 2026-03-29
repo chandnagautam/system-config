@@ -11,15 +11,15 @@ function M.setup()
         },
         respect_buf_cwd = true
     })
-    require("neovim-project").setup {
-        projects = {
-            "~/work/*",
-            "~/.config/*"
-        },
-        last_session_on_startup = false
-    }
-    vim.keymap.set('n', '<leader>p', '<cmd>Telescope neovim-project discover<cr>', {})
-    vim.keymap.set('n', '<leader>P', '<cmd>Telescope neovim-project history<cr>', {})
+    -- require("neovim-project").setup {
+    --     projects = {
+    --         "~/work/*",
+    --         "~/.config/*"
+    --     },
+    --     last_session_on_startup = false
+    -- }
+    -- vim.keymap.set('n', '<leader>p', '<cmd>Telescope neovim-project discover<cr>', {})
+    -- vim.keymap.set('n', '<leader>P', '<cmd>Telescope neovim-project history<cr>', {})
 end
 
 return M

@@ -73,7 +73,7 @@ function M.setup()
 	capabilities = vim.tbl_extend('keep', capabilities, require("lsp-status").capabilities)
 	capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-	require("lspconfig").pyright.setup{
+	vim.lsp.config['pyright'] = {
 		on_attach = on_attach,
 		capabilities = capabilities,
 		settings = {

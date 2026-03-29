@@ -18,8 +18,8 @@ add_to_lib("~/.local/share/nvim/site/pack/packer/opt/*")
 
 function M.setup()
 	local on_attach = function(client, bufnr)
-		require("lsp-status").register_progress()
-		require("lsp-status").on_attach(client)
+		vim.lsp.config.register_progress()
+		vim.lsp.config.on_attach(client)
 
 		local opts = {noremap = true, silent = false}
 
@@ -37,7 +37,7 @@ function M.setup()
 	local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 	capabilities = vim.tbl_extend('keep', capabilities, require("lsp-status").capabilities)
 
-	require("lspconfig").lua_ls.setup {
+	vim.lsp.config['luals'] = {
 		cmd = {sumneko_binary, "-E", sumneko_path .. "/main.lua"},
 		on_attach = on_attach,
 		settings = {

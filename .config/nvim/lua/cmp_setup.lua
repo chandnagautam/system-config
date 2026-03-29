@@ -47,13 +47,13 @@ function M.setup()
 			['<CR>'] = cmp.mapping.confirm({select = true})
 		}),
 		sources = cmp.config.sources({
-			{name = 'nvim_lsp'},
-			{name = 'luasnip'},
-			{name = 'buffer'},
-			{name = 'crates'},
-			{name = 'orgmode'},
-            {name = 'treesitter'}
-		})
+			{name = 'nvim_lsp', group_index = 2},
+			{name = 'luasnip', group_index = 2},
+			{name = 'buffer', grouop_index = 2},
+			{name = 'crates', group_index = 2},
+			{name = 'orgmode', group_index = 2},
+            {name = 'treesitter', group_index = 2},
+		}),
 	})
 end
 

@@ -10,6 +10,7 @@ vim.opt.background = 'dark'
 require("gruvbox").setup({
     contrast = "hard",
     terminal_colors = true, -- add neovim terminal colors
+    inverse = true
 })
 vim.opt.clipboard:append {"unnamedplus"}
 vim.cmd([[
@@ -87,8 +88,8 @@ dapui.setup({
 })
 require("cmp_setup").setup()
 require("rust_setup").setup()
-require("lua_setup").setup()
-require("ts").setup()
+-- require("lua_setup").setup()
+-- require("ts").setup()
 require("python_setup").setup()
 require("lsp-status").config({
     current_function = false,
@@ -141,3 +142,24 @@ require("projects").setup()
 require("scala_setup").setup()
 
 require("fidget").setup({})
+
+require("codecompanion_setup").setup()
+
+require("render-markdown").setup({
+    completions = {
+        lsp = {
+            enabled = true
+        }
+    },
+    file_types = {"markdown", "quarto", "codecompanion"}
+})
+
+require("img-clip").setup({
+    filetypes = {
+        codecompanion = {
+            prompt_for_file_name = false,
+            template = "[Image]($FILE_PATH)",
+            use_absolute_path = true
+        }
+    }
+})

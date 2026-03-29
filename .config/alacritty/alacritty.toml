@@ -1,0 +1,9 @@
+[terminal.shell]
+program = "/bin/fish"
+
+[window]
+decorations = "none"
+dynamic_padding = true
+startup_mode = "Maximized"
+
+[terminal]

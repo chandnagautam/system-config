@@ -51,7 +51,7 @@ return require('packer').startup(function()
 	use { 'sindrets/diffview.nvim' }
 	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use {'iamcco/markdown-preview.nvim', config = "vim.call('mkdp#util#install')"}
-    use 'simrat39/rust-tools.nvim'
+    -- use 'simrat39/rust-tools.nvim'
     use 'folke/zen-mode.nvim'
     use {
         'coffebar/neovim-project',
@@ -64,5 +64,23 @@ return require('packer').startup(function()
         requires = {
             {"j-hui/fidget.nvim"}
         }
+    }
+    use {
+        "mrcjkb/rustaceanvim",
+        version = '^6'
+    }
+    use {
+      "olimorris/codecompanion.nvim",
+      tag = "v19.2.0",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+      }
+    }
+    use {
+      'MeanderingProgrammer/render-markdown.nvim'
+    }
+    use {
+      "HakonHarnes/img-clip.nvim"
     }
 end)

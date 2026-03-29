@@ -22,6 +22,10 @@ window#waybar {
     color: #ff8700;
 }
 
+#workspaces button.active {
+    color: #ff8700;
+}
+
 #mode {
     background: #282828;
     color: #d05c5c;

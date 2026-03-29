@@ -80,12 +80,12 @@ function M.setup()
 			configuration = {
 				runtimes = {
 					{
-						name = "JavaSE-11",
-						path = "/etc/alternatives/java_sdk_11/"
+						name = "JavaSE-21",
+						path = "/home/gautam/.sdkman/candidates/java/21.0.10-amzn/"
 					},
                     {
                         name = "JavaSE-17",
-                        path = "/etc/alternatives/java_sdk_17/"
+                        path = "/home/gautam/.sdkman/candidates/java/17.0.16-amzn/"
                     }
 				}
 			}
@@ -103,8 +103,8 @@ function M.setup()
 		'--add-modules=ALL-SYSTEM',
 		'--add-opens', 'java.base/java.util=ALL-UNNAMED',
 		'--add-opens', 'java.base/java.lang=ALL-UNNAMED',
-		'-jar', home .. '/lsp/jdt-language-server-latest/plugins/org.eclipse.equinox.launcher_1.6.800.v20240304-1850.jar',
-		'-configuration', home .. '/lsp/jdt-language-server-latest/config_linux/',
+		'-jar', home .. '/lsp/jdt-language-server/plugins/org.eclipse.equinox.launcher_1.7.100.v20251111-0406.jar',
+		'-configuration', home .. '/lsp/jdt-language-server/config_linux/',
 		'-data', workspace_folder
 	}
 	config.on_attach = on_attach
@@ -115,8 +115,8 @@ function M.setup()
 	local bundles = {}
 
 	local jar_patterns = {
-		"/dap/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar",
-        "/test/vscode-java-test/extension/server/*.jar",
+		"/dap/java-debug/extension/server/com.microsoft.java.debug.plugin-*.jar",
+        "/dap/vscode-java-test/extension/server/*.jar",
 	}
 
 
