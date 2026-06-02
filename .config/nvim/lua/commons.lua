@@ -12,14 +12,14 @@ function M.common_bindings(bufnr, opts)
 	M.buf_set_keymap(bufnr, '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
 	M.buf_set_keymap(bufnr, ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 	M.buf_set_keymap(bufnr, 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	M.buf_set_keymap(bufnr, 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>', opts)
-	M.buf_set_keymap(bufnr, 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<CR>', opts)
-	M.buf_set_keymap(bufnr, "gs", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
-	M.buf_set_keymap(bufnr, "gS", '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>', opts)
+	-- M.buf_set_keymap(bufnr, 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>', opts)
+	-- M.buf_set_keymap(bufnr, 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<CR>', opts)
+	-- M.buf_set_keymap(bufnr, "gs", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
+	-- M.buf_set_keymap(bufnr, "gS", '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>', opts)
 
-	M.buf_set_keymap(bufnr, 'gy', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<CR>', opts)
+	-- M.buf_set_keymap(bufnr, 'gy', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<CR>', opts)
 
-	M.buf_set_keymap(bufnr, 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<CR>', opts)
+	-- M.buf_set_keymap(bufnr, 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<CR>', opts)
 
 	M.buf_set_keymap(bufnr, '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
 

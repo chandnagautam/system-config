@@ -2,15 +2,15 @@ local M = {}
 
 function M.setup()
     vim.opt.sessionoptions:append("globals")
-    require('nvim-tree').setup({
-        renderer = {
-            group_empty = true
-        },
-        view = {
-            adaptive_size = true
-        },
-        respect_buf_cwd = true
-    })
+    -- require('nvim-tree').setup({
+    --     renderer = {
+    --         group_empty = true
+    --     },
+    --     view = {
+    --         adaptive_size = true
+    --     },
+    --     respect_buf_cwd = true
+    -- })
     -- require("neovim-project").setup {
     --     projects = {
     --         "~/work/*",

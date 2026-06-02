@@ -9,12 +9,12 @@ return require('packer').startup(function()
 		'hoob3rt/lualine.nvim',
 		requires = {'kyazdani42/nvim-web-devicons'}
 	}
-    use {
-        'nvim-tree/nvim-tree.lua',
-        requires = {
-            'nvim-tree/nvim-web-devicons'
-        }
-    }
+    -- use {
+    --     'nvim-tree/nvim-tree.lua',
+    --     requires = {
+    --         'nvim-tree/nvim-web-devicons'
+    --     }
+    -- }
 	use 'neovim/nvim-lspconfig'
 	use 'mfussenegger/nvim-dap'
 	use 'mfussenegger/nvim-jdtls'
@@ -35,10 +35,10 @@ return require('packer').startup(function()
 		'saecki/crates.nvim',
 		requires = { 'nvim-lua/plenary.nvim' },
 	}
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
-	}
+	-- use {
+	-- 	'nvim-treesitter/nvim-treesitter',
+	-- 	run = ':TSUpdate',
+	-- }
 
 	use 'nvim-telescope/telescope.nvim'
 	use {'nvim-telescope/telescope-ui-select.nvim' }
@@ -67,20 +67,28 @@ return require('packer').startup(function()
     }
     use {
         "mrcjkb/rustaceanvim",
-        version = '^6'
+        branch = 'main',
+        version = '^9'
     }
-    use {
-      "olimorris/codecompanion.nvim",
-      tag = "v19.2.0",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-      }
-    }
+    -- use {
+    --   "olimorris/codecompanion.nvim",
+    --   tag = "v19.13.0",
+    --   requires = {
+    --     "nvim-lua/plenary.nvim",
+    --     -- "nvim-treesitter/nvim-treesitter",
+    --   }
+    -- }
     use {
       'MeanderingProgrammer/render-markdown.nvim'
     }
     use {
       "HakonHarnes/img-clip.nvim"
     }
+    use {
+        "romus204/tree-sitter-manager.nvim"
+    }
+    use 'folke/snacks.nvim' -- for modern input UI
+
+    use 'nickjvandyke/opencode.nvim'
 end)
+

@@ -44,16 +44,17 @@ vim.opt.mouse = "a"
 vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.foldmethod='expr'
-vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+-- vim.opt.foldexpr='nvim_treesitter#foldexpr()'
 vim.opt.foldlevel=20
 
 
-vim.api.nvim_set_keymap('n', '<Leader>s', '<cmd>lua require("telescope.builtin").live_grep()<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>;', '<cmd>lua require("telescope.builtin").buffers()<CR>', {silent = true, noremap = true})
+-- vim.api.nvim_set_keymap('n', '<Leader>s', '<cmd>lua require("telescope.builtin").live_grep()<CR>', {noremap = true})
+-- vim.api.nvim_set_keymap('n', '<Leader>;', '<cmd>lua require("telescope.builtin").buffers()<CR>', {silent = true, noremap = true})
 vim.api.nvim_set_keymap('n', '?', "?\\v", {noremap = true, silent = false})
 vim.api.nvim_set_keymap('n', '/', "/\\v", {noremap = true, silent = false})
-vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua require("telescope.builtin").find_files()<CR>', {noremap = true, silent = false})
+-- vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+-- vim.api.nvim_set_keymap('n', '<leader>f', '<cmd>lua require("telescope.builtin").find_files()<CR>', {noremap = true, silent = false})
+-- vim.api.nvim_set_keymap("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -64,8 +65,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 
 local dap, dapui = require("dap"), require("dapui")
 
-require("telescope_setup").setup()
-require("treesitter").setup()
+require("snacks_setup").setup()
+-- require("treesitter").setup()
+require("tree-sitter-manager").setup()
 require("lspkind").init()
 dapui.setup({
     icons = {
@@ -143,8 +145,6 @@ require("scala_setup").setup()
 
 require("fidget").setup({})
 
-require("codecompanion_setup").setup()
-
 require("render-markdown").setup({
     completions = {
         lsp = {
@@ -153,6 +153,9 @@ require("render-markdown").setup({
     },
     file_types = {"markdown", "quarto", "codecompanion"}
 })
+
+
+require("opencode_setup").setup()
 
 require("img-clip").setup({
     filetypes = {
