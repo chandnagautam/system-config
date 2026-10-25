@@ -89,6 +89,10 @@ return require('packer').startup(function()
     }
     use 'folke/snacks.nvim' -- for modern input UI
 
-    use 'nickjvandyke/opencode.nvim'
+    -- use 'nickjvandyke/opencode.nvim'
+    use 'folke/sidekick.nvim'
+
+
+    use 'alexghergh/nvim-tmux-navigation'
 end)
 

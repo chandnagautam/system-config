@@ -23,7 +23,6 @@ function M.setup()
 		vim.api.nvim_exec([[
 			augroup FormatJavaAuGroup
 				autocmd!
-				autocmd BufWritePost *.java lua vim.lsp.buf.format()
 				" autocmd BufWritePost *.java lua require('jdtls.dap').setup_dap_main_class_configs()
 				" autocmd BufWritePost *.java JdtUpdateConfig
 			augroup end

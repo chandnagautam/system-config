@@ -1,76 +1,54 @@
-local M = {};
+local M = {}
 
-function M.buf_set_keymap(bufnr, ...)
-	vim.api.nvim_buf_set_keymap(bufnr, 'n', ...)
-end
-
-function M.buf_set_option(bufnr, ...)
-	vim.api.nvim_buf_set_option(bufnr, ...)
+function M.buf_set_keymap(bufnr, lhs, rhs, opts)
+    vim.keymap.set('n', lhs, rhs, vim.tbl_extend('force', { buffer = bufnr }, opts or {}))
 end
 
 function M.common_bindings(bufnr, opts)
-	M.buf_set_keymap(bufnr, '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-	M.buf_set_keymap(bufnr, ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-	M.buf_set_keymap(bufnr, 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-	-- M.buf_set_keymap(bufnr, 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<CR>', opts)
-	-- M.buf_set_keymap(bufnr, 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<CR>', opts)
-	-- M.buf_set_keymap(bufnr, "gs", '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>', opts)
-	-- M.buf_set_keymap(bufnr, "gS", '<cmd>lua require("telescope.builtin").lsp_dynamic_workspace_symbols()<CR>', opts)
+    opts = opts or { noremap = true, silent = true }
 
-	-- M.buf_set_keymap(bufnr, 'gy', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<CR>', opts)
+    -- Diagnostics
+    M.buf_set_keymap(bufnr, '[g', function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
+    M.buf_set_keymap(bufnr, ']g', function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+    M.buf_set_keymap(bufnr, '<leader>e', function() vim.diagnostic.open_float({ scope = 'line' }) end, opts)
 
-	-- M.buf_set_keymap(bufnr, 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<CR>', opts)
+    -- LSP actions
+    M.buf_set_keymap(bufnr, 'gD', vim.lsp.buf.declaration, opts)
+    M.buf_set_keymap(bufnr, 'K', vim.lsp.buf.hover, opts)
+    M.buf_set_keymap(bufnr, 'rn', vim.lsp.buf.rename, opts)
+    M.buf_set_keymap(bufnr, 'ga', vim.lsp.buf.code_action, opts)
 
-	M.buf_set_keymap(bufnr, '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+    -- DAP (Debug Adapter Protocol)
+    local has_dap, dap = pcall(require, "dap")
+    if has_dap then
+        M.buf_set_keymap(bufnr, '<leader>b', dap.toggle_breakpoint, opts)
+        M.buf_set_keymap(bufnr, '<leader>B', function() dap.set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, opts)
+        M.buf_set_keymap(bufnr, '<leader>lp', function() dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: ")) end, opts)
+        M.buf_set_keymap(bufnr, '<F5>', dap.continue, opts)
+        M.buf_set_keymap(bufnr, '<F6>', dap.step_over, opts)
+        M.buf_set_keymap(bufnr, '<F7>', dap.step_into, opts)
+        M.buf_set_keymap(bufnr, '<F8>', dap.step_out, opts)
+    end
 
-	M.buf_set_keymap(bufnr, 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-	M.buf_set_keymap(bufnr, 'rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-	M.buf_set_keymap(bufnr, 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-
-	M.buf_set_keymap(bufnr, 'gA', '<cmd>lua vim.lsp.buf.range_code_action()<CR>', opts)
-
-	M.buf_set_keymap(bufnr, '<leader>b', '<cmd>lua require("dap").toggle_breakpoint()<CR>', opts)
-	M.buf_set_keymap(bufnr, '<leader>B', '<cmd>lua require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))<CR>', opts)
-	M.buf_set_keymap(bufnr, '<leader>lp', '<cmd>lua require("dap").set_breakpoint(nil, nil, vim.fn.input("Log point message: "))<CR>', opts)
-	M.buf_set_keymap(bufnr, '<F5>', '<cmd>lua require("dap").continue()<CR>', opts)
-	M.buf_set_keymap(bufnr, '<F6>', '<cmd>lua require("dap").step_over()<CR>', opts)
-	M.buf_set_keymap(bufnr, '<F7>', '<cmd>lua require("dap").step_into()<CR>', opts)
-	M.buf_set_keymap(bufnr, '<F8>', '<cmd>lua require("dap").step_out()<CR>', opts)
-end
-
-
-function M.lsp_request(bufnr, method, params, handler)
-	return vim.lsp.buf_request(bufnr, method, params, handler)
-end
-
-function M.scheduled_error(err)
-	vim.schedule(function()
-		vim.notify(err, vim.log.level.ERROR)
-	end)
+    -- Terminal navigation
+    local t_opts = { silent = true }
+    vim.keymap.set('t', '<C-w>h', '<C-\\><C-n><C-w>h', t_opts)
+    vim.keymap.set('t', '<C-w>j', '<C-\\><C-n><C-w>j', t_opts)
+    vim.keymap.set('t', '<C-w>k', '<C-\\><C-n><C-w>k', t_opts)
+    vim.keymap.set('t', '<C-w>l', '<C-\\><C-n><C-w>l', t_opts)
 end
 
 function M.get_lsp_client()
-	local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-	local clients = vim.lsp.buf_get_clients()
-
-	for _, client in pairs(clients) do
-		local filetypes = client.config.filetypes
-		if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-			return client
-		end
-	end
-
-	return nil
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    return clients[1] or nil
 end
 
 function M.get_current_root()
-	local client = M.get_lsp_client()
-
-	if client == nil then
-		return vim.fn.expand("%:p:h")
-	else
-		return client.config.project_root
-	end
+    local client = M.get_lsp_client()
+    if not client or not client.config.root_dir then
+        return vim.fn.expand("%:p:h")
+    end
+    return client.config.root_dir
 end
 
 return M

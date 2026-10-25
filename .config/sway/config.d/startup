@@ -1,2 +1,4 @@
-exec mako
-exec blueman-applet
+#exec mako
+#exec blueman-applet
+exec kanshi
+#exec swaybg -i /home/gautam/Pictures/wallpaper/wp7763010-4k-minimalist-ps4-wallpapers.jpg -m fill

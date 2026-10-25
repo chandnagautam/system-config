@@ -155,7 +155,9 @@ require("render-markdown").setup({
 })
 
 
-require("opencode_setup").setup()
+-- require("opencode_setup").setup()
+
+require("sidekick_setup").setup()
 
 require("img-clip").setup({
     filetypes = {
@@ -166,3 +168,16 @@ require("img-clip").setup({
         }
     }
 })
+
+require("nvim-tmux-navigation").setup({
+    keybindings = {
+        left = "<C-h>",
+        down = "<C-j>",
+        up = "<C-k>",
+        right = "<C-l>",
+        last_active = "<C-\\>",
+        next = "<C-Space>",
+    }
+})
+
+require("cpp_setup").setup()

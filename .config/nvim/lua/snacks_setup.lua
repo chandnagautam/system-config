@@ -19,6 +19,9 @@ function M.setup()
         },
         explorer = {
             enabled = true,
+        },
+        image = {
+            enabled = true
         }
     })
 
